@@ -31,8 +31,6 @@ user_agents = [
     "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
     ]
 
-headers = {'User-Agent': random.choice(user_agents)}
-
 def concurrency(hash_list):
     ''' Open all the greenlet threads '''
     try:        
@@ -64,12 +62,14 @@ def concurrency(hash_list):
         sys.exit()
 
 def leakdb(h):
+    headers = {'User-Agent': random.choice(user_agents)}
     r = requests.get('https://api.leakdb.net/?j={}'.format(h), headers=headers)
     json = r.json()
     if json['found'] == 'true':
         print "{}:{}:{}".format(h, json['hashes'][0]['plaintext'], json['type'])
 
 def hash_toolkit(h):
+    headers = {'User-Agent': random.choice(user_agents)}
     r = requests.get('https://hashtoolkit.com/reverse-hash/?hash={}'.format(h), headers=headers)
     tree = lxml.html.fromstring(r.text)
     for v in tree.xpath('//td[@class="res-text"]/*'):
@@ -79,6 +79,7 @@ def hash_toolkit(h):
 
 def bozocrack(params):
     url, h = params
+    headers = {'User-Agent': random.choice(user_agents)}
     r = requests.get(url, headers=headers)
     for word in re.split(r'\s+', r.text):
         m = hashlib.md5()
