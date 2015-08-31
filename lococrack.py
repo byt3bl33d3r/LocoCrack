@@ -50,7 +50,7 @@ def concurrency(hash_list):
                 if args.bozocrack == 'google':
                     params.append(("https://www.google.com/search?q={}".format(h), h))
                 elif args.bozocrack == 'ddg':
-                    params.append(("https://duckduckgo.com/html/?q={}".format(h), h))
+                    params.append(("https://www.duckduckgo.com/html/?q={}".format(h), h))
                 elif args.bozocrack == 'yandex':
                     params.append(("https://www.yandex.com/search/?text={}".format(h), h))
 
